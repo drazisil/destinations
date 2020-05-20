@@ -1,0 +1,10 @@
+name: Destinations
+version: @version@
+main: com.drazisil.destinations.Destinations
+api-version: "1.13"
+authors: [Drazisil]
+description: Travel betwen points
+commands:
+  tprandom:
+    description: Teleport to a random location
+    usage: /tprandom
