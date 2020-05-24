@@ -1,6 +1,7 @@
 package com.drazisil.destinations;
 
 import com.drazisil.destinations.command.CommandTPRandom;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,12 +32,11 @@ public final class Destinations extends JavaPlugin {
         plugin.saveDefaultConfig();
 
         // Register the command handler
-        try {
-            // TODO: Check for NPE
-            Objects.requireNonNull(this.getCommand("tprandom")).setExecutor(new CommandTPRandom());
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        PluginCommand pluginCmd = this.getCommand("tprandom");
+
+        if (pluginCmd == null) throw new Error("Unable to fetch command handler for `tprandom");
+
+        pluginCmd.setExecutor(new CommandTPRandom());
 
         // Register the event listener
         getServer().getPluginManager().registerEvents(new EventListener(), this);

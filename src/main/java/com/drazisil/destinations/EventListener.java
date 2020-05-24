@@ -2,6 +2,7 @@ package com.drazisil.destinations;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -53,13 +54,23 @@ public class EventListener implements Listener {
                                 new LocationTagType()
                         );
 
-                        player.sendMessage(String.format("Waystone is for to %s, %s, %s, %s",
-                                // TODO: Check for NPE
-                                Objects.requireNonNull(Objects.requireNonNull(waystoneLocation).getWorld()).getName(),
-                                waystoneLocation.getX(),
-                                waystoneLocation.getY(),
-                                waystoneLocation.getZ()
-                        ));
+                        if (waystoneLocation == null) throw new Error("Unable to fetch location for waystone");
+
+                        try {
+                            World waystoneWorld = waystoneLocation.getWorld();
+
+                            if (waystoneWorld == null) throw new Error("Unable to fetch world for waystone location");
+                            player.sendMessage(String.format("Waystone is for to %s, %s, %s, %s",
+                                    waystoneWorld.getName(),
+                                    waystoneLocation.getX(),
+                                    waystoneLocation.getY(),
+                                    waystoneLocation.getZ()
+                            ));
+
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+
 
 
                         // Let's teleport!
@@ -80,9 +91,12 @@ public class EventListener implements Listener {
 
                     itemUsed.setItemMeta(itemMeta);
 
+                    World playerWorld = playerLocation.getWorld();
+
+                    if (playerWorld == null) throw new Error("Unable to fetch world for player");
+
                     player.sendMessage(String.format("Waystone set to %s, %s, %s, %s",
-                            // TODO: Check for NPE
-                            Objects.requireNonNull(playerLocation.getWorld()).getName(),
+                            playerLocation.getWorld().getName(),
                             playerLocation.getX(),
                             playerLocation.getY(),
                             playerLocation.getZ()

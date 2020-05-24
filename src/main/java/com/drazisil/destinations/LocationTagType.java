@@ -21,9 +21,13 @@ public class LocationTagType implements PersistentDataType<String, Location> {
 
     @Override
     public String toPrimitive(Location complex, PersistentDataAdapterContext context) {
+
+        World waystoneWorld = complex.getWorld();
+
+        if (waystoneWorld == null) throw new Error("Unable to fetch world for waystone while storing");
+
         return String.format("%s, %s, %s, %s",
-                // TODO: Check for NPE
-                Objects.requireNonNull(complex.getWorld()).getName(),
+                complex.getWorld().getName(),
                 complex.getX(),
                 complex.getY(),
                 complex.getZ()
