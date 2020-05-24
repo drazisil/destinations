@@ -2,14 +2,8 @@ package com.drazisil.destinations;
 
 import com.drazisil.destinations.command.CommandTPRandom;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public final class Destinations extends JavaPlugin {
@@ -17,6 +11,8 @@ public final class Destinations extends JavaPlugin {
     public static Destinations plugin;
 
     public static Logger logger;
+
+    public static final String MODID = "destinations";
 
 
     public Destinations getPlugin() {

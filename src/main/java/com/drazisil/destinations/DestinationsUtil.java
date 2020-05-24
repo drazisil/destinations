@@ -1,15 +1,29 @@
 package com.drazisil.destinations;
 
 import org.bukkit.*;
+import org.bukkit.permissions.Permission;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static org.bukkit.permissions.PermissionDefault.OP;
+
 public final class DestinationsUtil {
+
+    public static final Permission DESTINATIONS_WAYSTONE_CREATE_PERM = new Permission(
+            Destinations.MODID + ".waystone.create",
+            "Permission to create a waystone",
+            OP);
+
+    public static final Permission DESTINATIONS_WAYSTONE_USE_PERM = new Permission(
+            Destinations.MODID + ".waystone.use",
+            "Permission to use a waystone",
+            OP);
 
     public static final String DESTINATIONS_TELEPORT_RANDOM_PERM = "destinations.teleport.random";
 
     public static final NamespacedKey DESTINATIONS_TELEPORT_WAYSTONE_LOCATION_KEY
-            = new NamespacedKey(Destinations.plugin, "destinations.teleport.waystone.location");
+            = new NamespacedKey(Destinations.plugin, Destinations.MODID + ".teleport.waystone.location");
+
 
     public static Location generateRandomLocation(World playerWorld, WorldBorder border) {
         int borderSize = (int) border.getSize() / 4;
