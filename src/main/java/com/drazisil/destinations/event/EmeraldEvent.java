@@ -1,6 +1,5 @@
 package com.drazisil.destinations.event;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -38,11 +37,11 @@ public class EmeraldEvent {
                     Block clickedBlock = event.getClickedBlock();
 
 
-                    if (clickedBlock != null && clickedBlock.getType() == Material.ANVIL) {
-                        event.setCancelled(true);
-                        player.sendMessage("You are trying to use an anvil...");
-                        return;
-                    }
+//                    if (clickedBlock != null && clickedBlock.getType() == Material.ANVIL) {
+//                        event.setCancelled(true);
+//                        player.sendMessage("You are trying to use an anvil...");
+//                        return;
+//                    }
 
 
                     if (player.hasPermission(DESTINATIONS_WAYSTONE_USE_PERM)) {
